@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Access Granted | {{ app_name }}{% endblock %}
+{% block content %}
+<section class="card centered success-card">
+  <div class="icon-box success"><span>✓</span></div>
+  <p class="eyebrow success-text">VERIFICATION COMPLETE</p>
+  <h1 class="success-text">ACCESS GRANTED</h1>
+  <p class="lead">Your session was verified successfully. Redirecting you now…</p>
+  <a class="primary-button" href="{{ target_url }}" rel="noopener noreferrer">Continue</a>
+  <p class="footnote">🔒 Security enforced by <b>{{ app_name }}</b></p>
+</section>
+<script>
+window.setTimeout(() => window.location.replace({{ target_url | tojson }}), {{ delay_ms }});
+</script>
+{% endblock %}

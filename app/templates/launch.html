@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Secure Redirect | {{ app_name }}{% endblock %}
+{% block content %}
+<section class="card centered" id="launch" data-link-id="{{ link_id }}" data-challenge="{{ challenge }}">
+  <div class="icon-box violet">
+    <span class="spinner"></span>
+  </div>
+  <p class="eyebrow">SECURE SESSION</p>
+  <h1>Preparing your link</h1>
+  <p class="lead">Please keep this page open. Your protected browser session is being verified.</p>
+  <div class="progress"><span></span></div>
+  <p class="footnote">🔒 Security enforced by <b>{{ app_name }}</b></p>
+</section>
+<script>
+(() => {
+  const launch = document.getElementById('launch');
+  const linkId = launch.dataset.linkId;
+  const challenge = launch.dataset.challenge;
+  const fail = (reason) => {
+    const safe = encodeURIComponent(reason || 'invalid_session');
+    window.location.replace(`/access-denied?reason=${safe}`);
+  };
+  window.setTimeout(async () => {
+    try {
+      const response = await fetch(`/go/${encodeURIComponent(linkId)}/continue`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        cache: 'no-store',
+        headers: {'Content-Type': 'application/json', 'X-RDX-Browser': '1'},
+        body: JSON.stringify({challenge})
+      });
+      const data = await response.json();
+      if (!response.ok || !data.ok || !data.redirect) return fail(data.reason);
+      window.location.replace(data.redirect);
+    } catch (_) {
+      fail('shortener_error');
+    }
+  }, 900);
+})();
+</script>
+{% endblock %}

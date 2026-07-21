@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Access Denied | {{ app_name }}{% endblock %}
+{% block content %}
+<section class="card centered denied-card">
+  <div class="icon-box danger"><span>⊘</span></div>
+  <p class="eyebrow danger-text">SECURITY VIOLATION</p>
+  <h1 class="danger-text">🚫 ACCESS DENIED!</h1>
+  <p class="lead">We could not process your request due to a security violation.</p>
+  <div class="notice danger-notice">
+    <b>⚠️ {{ message }}</b>
+    {% if shortener_domain %}
+    <span>Please complete the required steps on {{ shortener_domain }}.</span>
+    {% else %}
+    <span>Please restart from the original protected link.</span>
+    {% endif %}
+  </div>
+  <p class="reason-code">Reason: {{ reason | upper }}</p>
+  <p class="footnote">🔒 Security enforced by <b>{{ app_name }}</b></p>
+</section>
+{% endblock %}

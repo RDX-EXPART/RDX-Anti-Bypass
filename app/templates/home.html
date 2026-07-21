@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ app_name }}{% endblock %}
+{% block content %}
+<section class="card home-card">
+  <div class="brand-mark shield">RDX</div>
+  <p class="eyebrow">SMART • SECURE • POWERFUL</p>
+  <h1>{{ app_name }}</h1>
+  <p class="lead">Same-browser link protection with one-time callbacks, expiry and replay detection.</p>
+  <div class="status-row">
+    <span class="status-dot"></span>
+    <span>Protection service is online</span>
+  </div>
+  {% if demo_mode %}
+  <div class="notice amber">Demo mode is enabled. Configure your shortener API before production.</div>
+  {% endif %}
+  <div class="feature-grid">
+    <div><b>🛡 Anti-bypass</b><span>Session-bound callbacks</span></div>
+    <div><b>🔁 Replay lock</b><span>One-time token use</span></div>
+    <div><b>📊 Activity</b><span>Reason-based logs</span></div>
+    <div><b>⚡ Developer API</b><span>Simple bot integration</span></div>
+  </div>
+</section>
+{% endblock %}
