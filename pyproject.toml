@@ -1,0 +1,12 @@
+[project]
+name = "rdx-anti-bypass"
+version = "1.0.0"
+description = "Telegram-managed same-browser protection for shortened links"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.vercel]
+entrypoint = "app.main:app"
