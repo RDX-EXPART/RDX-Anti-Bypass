@@ -32,7 +32,7 @@ def _csv_ints(value: str | None) -> tuple[int, ...]:
 class Settings:
     app_name: str = "RDX Protect Bot"
     environment: str = "development"
-    public_base_url: str = "http://localhost:8000"
+    public_base_url: str = "https://rdx-anti-bypass-veft.vercel.app/"
     secret_key: str = "dev-secret-change-me"
     api_key: str = "dev-api-key-change-me"
 
